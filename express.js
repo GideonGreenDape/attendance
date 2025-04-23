@@ -6,6 +6,7 @@ const generateAttendance = require('./Routes/generateAtt');
 const ValidateToken = require('./Routes/validatetoken');
 const Attendanceperformance = require('./Routes/attendanceperformance')
 const allStudentAttendanceRouter = require('./Routes/fetchallstudentattendance');
+const AdminlogRouter = require('./Routes/adminlog');
 const cors = require('cors');
 
 const app= express();
@@ -23,6 +24,7 @@ app.use('/generatelink/',generateAttendance);
 app.use('/validatelink/',ValidateToken);
 app.use('/performance',Attendanceperformance);
 app.use('/fetchallstudentattendance', allStudentAttendanceRouter);
+app.use('/adminlog', AdminlogRouter);
 
 
 

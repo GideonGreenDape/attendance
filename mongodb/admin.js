@@ -4,25 +4,26 @@ require('dotenv').config()
 const url = process.env.CONNECTION_URI;
 const client = new MongoClient(url);
 const dbName = 'MvcCohort';
-const document = 'signup';
+const document = 'admin';
 
-
-async function SigninConnection(student_id, password) {
+async function AdminSignIn(username, password) {
     try {
         await client.connect();
-        console.log('Signin DB logic connected to MongoDb Database');
+        console.log('Admin Signin DB logic connected to MongoDb Database');
         const db = client.db(dbName);
         const collection = db.collection(document);
-        const student = await collection.findOne({ student_id: student_id, password: password });
-        if (student) {
+        
+        const admin = await collection.findOne({ 
+            username: username, 
+            password: password 
+        });
+
+        if (admin) {
             return {
-                firstname: student.firstname,
-                lastname: student.lastname,
-                department: student.department,
-                student_id: student_id,
+                username: admin.username,
+                role: admin.role || 'admin'
             };
-        }
-        else {
+        } else {
             return false;
         }
     } catch (err) {
@@ -30,9 +31,8 @@ async function SigninConnection(student_id, password) {
         return false;
     } finally {
         await client.close();
-        console.log('Signin DB logic closed connection to MongoDb Database');
+        console.log('Admin Signin DB logic closed connection to MongoDb Database');
     }
 }
 
-
-module.exports = SigninConnection;
+module.exports = AdminSignIn;
