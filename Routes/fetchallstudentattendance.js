@@ -6,11 +6,13 @@ allStudentAttendanceRouter.get('/', async (req, res) => {
         const stats = await fetchAllStudentsAttendance();
         res.status(200).json({
             success: true,
-            data: stats
+            data: {
+                regularAttendance: stats.regular,
+                softskillAttendance: stats.softskill
+            }
         });
     } catch (error) {
-        console.log(error);
-        
+        console.error('Failed to fetch attendance stats:', error);
         res.status(500).json({
             success: false,
             message: 'Failed to fetch attendance statistics'

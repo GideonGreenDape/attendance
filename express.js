@@ -9,6 +9,8 @@ const allStudentAttendanceRouter = require('./Routes/fetchallstudentattendance')
 const AdminlogRouter = require('./Routes/adminlog');
 const softskillsAttendance = require('./Routes/softskillattendance');
 const sofskillvalidate= require('./Routes/softskillvalidate')
+const softskillsmarks = require('./Routes/softkillmark');
+const softskillAttendanceperformance= require('./Routes/softskillperformance')
 const cors = require('cors');
 
 const app= express();
@@ -22,11 +24,13 @@ app.use(express.urlencoded({extended:true}));
 app.use('/signup', SignupRouter);
 app.use('/signin', SigninRouter);
 app.use('/mark/',Attendance);
+app.use('/softskillmark/',softskillsmarks);
 app.use('/generatelink/',generateAttendance);
 app.use('/softskillattendance/',softskillsAttendance);
 app.use('/softskillvalidate/',sofskillvalidate);
 app.use('/validatelink/',ValidateToken);
 app.use('/performance',Attendanceperformance);
+app.use('/softskillperformance',softskillAttendanceperformance);
 app.use('/fetchallstudentattendance', allStudentAttendanceRouter);
 app.use('/adminlog', AdminlogRouter);
 

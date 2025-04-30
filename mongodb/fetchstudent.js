@@ -5,6 +5,7 @@ const formatDate = require('../utility/dategenerator');
 const url = process.env.CONNECTION_URI;
 const dbName = 'MvcCohort';
 const attendanceDoc = 'attendance';
+const softskillDoc = 'softskill_attendance';
 const signupDoc = 'signup';
 
 async function fetchAllStudentsAttendance() {
@@ -15,9 +16,9 @@ async function fetchAllStudentsAttendance() {
         console.log('Connected to MongoDB for fetching attendance');
         
         const db = client.db(dbName);
-        const collection = db.collection(attendanceDoc);
-
-        const pipeline = [
+        
+        // Regular attendance pipeline
+        const regularPipeline = [
             {
                 $group: {
                     _id: {
@@ -72,11 +73,63 @@ async function fetchAllStudentsAttendance() {
             }
         ];
 
-        const results = await collection.aggregate(pipeline).toArray();
-        return results;
+        // Softskill attendance pipeline
+        const softskillPipeline = [
+            {
+                $group: {
+                    _id: {
+                        student_id: "$student_id",
+                        department: "$department"
+                    },
+                    presentDays: {
+                        $sum: {
+                            $cond: [{ $eq: ["$status", "present"] }, 1, 0]
+                        }
+                    },
+                    totalRecords: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    student_id: "$_id.student_id",
+                    department: "$_id.department",
+                    presentDays: 1,
+                    absentDays: {
+                        $subtract: [60, "$presentDays"]
+                    },
+                    attendancePercentage: {
+                        $round: [
+                            {
+                                $multiply: [
+                                    { $divide: ["$presentDays", 60] },
+                                    100
+                                ]
+                            },
+                            2
+                        ]
+                    }
+                }
+            },
+            {
+                $sort: { student_id: 1 }
+            }
+        ];
+
+        // Execute both pipelines
+        const regularAttendance = await db.collection(attendanceDoc)
+            .aggregate(regularPipeline).toArray();
+        const softskillAttendance = await db.collection(softskillDoc)
+            .aggregate(softskillPipeline).toArray();
+
+        // Combine results
+        return {
+            regular: regularAttendance,
+            softskill: softskillAttendance
+        };
 
     } catch (error) {
-        console.log('Error fetching attendance:', error);
+        console.error('Error fetching attendance:', error);
         throw error;
     } finally {
         if (client) {
