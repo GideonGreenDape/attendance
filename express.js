@@ -15,8 +15,16 @@ const cors = require('cors');
 
 const app= express();
 
+const allowedOrigins = ['https://attendancefrontend.onrender.com']
 
 app.use(cors({
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     origin: true, // Reflects the request origin
     credentials: true, // Allows credentials to be sent
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
