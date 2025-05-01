@@ -5,7 +5,7 @@ const formatDate = require('../utility/dategenerator');
 const url = process.env.CONNECTION_URI;
 const dbName = 'MvcCohort';
 const attendanceDoc = 'attendance';
-const softskillDoc = 'softskill_attendance';
+const softskillDoc = 'softskills';
 const signupDoc = 'signup';
 
 async function fetchAllStudentsAttendance() {
