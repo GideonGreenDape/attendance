@@ -17,10 +17,20 @@ const app= express();
 
 
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: true, // Reflects the request origin
+    credentials: true, // Allows credentials to be sent
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: [
+        'Origin',
+        'X-Requested-With',
+        'Content-Type',
+        'Accept',
+        'Authorization'
+    ],
+    exposedHeaders: ['Set-Cookie']
 }));
+
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
