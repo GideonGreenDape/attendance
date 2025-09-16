@@ -1,1 +1,13 @@
+const DashboardAnalytics = require("express").Router();
+const analytics = require("../mongodb/analytics");
 
+
+DashboardAnalytics.get("/", async (req, res) => {
+    try {
+      
+    } catch (error) {
+        
+    }
+});
+
+module.exports = DashboardAnalytics;
