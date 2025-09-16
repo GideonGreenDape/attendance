@@ -1,5 +1,5 @@
 const DashboardAnalytics = require("express").Router();
-const TotalStudents = require("../mongodb/totalstudents");
+const TotalStudents = require("../mongodb/totalstudent");
 
 
 DashboardAnalytics.get("/", async (req, res) => {
