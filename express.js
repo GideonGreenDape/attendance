@@ -3,6 +3,7 @@ const SignupRouter= require('./Routes/signup');
 const SigninRouter= require('./Routes/signin');
 const Attendance = require('./Routes/attendance')
 const generateAttendance = require('./Routes/generateAtt');
+const AdminSignuproute= require('./Routes/')
 const ValidateToken = require('./Routes/validatetoken');
 const Attendanceperformance = require('./Routes/attendanceperformance')
 const allStudentAttendanceRouter = require('./Routes/fetchallstudentattendance');
@@ -55,6 +56,7 @@ app.use('/performance',Attendanceperformance);
 app.use('/softskillperformance',softskillAttendanceperformance);
 app.use('/fetchallstudentattendance', allStudentAttendanceRouter);
 app.use('/adminlog', AdminlogRouter);
+app.use('/adminsignup', AdminSignuproute);
 
 
 
