@@ -1,0 +1,28 @@
+const adminSignupRouter = require("express").Router();
+const AdminSignUp = require("../mongodb/adminSignup"); 
+adminSignupRouter.post("/", async (req, res) => {
+    const { username, password, role } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
+    }
+
+    try {
+        const result = await AdminSignUp(username, password, role);
+
+        if (result.success) {
+            res.status(201).json({
+                message: "Admin account created successfully",
+                username: result.username,
+                role: result.role
+            });
+        } else {
+            res.status(400).json({ message: result.message || "Signup failed" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+module.exports = adminSignupRouter;
