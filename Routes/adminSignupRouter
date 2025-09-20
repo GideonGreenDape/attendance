@@ -1,5 +1,5 @@
 const adminSignupRouter = require("express").Router();
-const AdminSignUp = require("../mongodb/adminSignup"); 
+const AdminSignUp = require("../mongodb/adminsignup"); 
 adminSignupRouter.post("/", async (req, res) => {
     const { username, password, role } = req.body;
 
