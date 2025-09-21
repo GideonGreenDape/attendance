@@ -70,3 +70,38 @@ createAssesmentQuestion.post('/', async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+// {
+//  "title": "Algebra Fundamentals Quiz",
+//  "subject": "Mathematics",
+// "status": "Active",
+//  "questions": [
+//    {
+//      "questionText": "What is 5 × 6?",
+//      "options": ["28", "30", "32", "35"],
+//      "correctAnswer": "30",
+//     "points": 2
+//    },
+//    {
+//      "questionText": "Simplify: 12x + 7x",
+//      "options": ["19", "19x", "20x", "12x7"],
+//      "correctAnswer": "19x",
+//     "points": 3
+//    }
+//  ],
+//   "assignedTo": [
+//    {
+//      "studentId": "stu101",
+//     "name": "Jane Doe",
+//      "completionStatus": "Completed",
+//      "score": 85
+//    },
+//    {
+//      "studentId": "stu102",
+//      "name": "John Smith"
+//    }
+//  ]
+// }
+
