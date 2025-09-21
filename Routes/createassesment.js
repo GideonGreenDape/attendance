@@ -69,6 +69,20 @@ createAssesmentQuestion.post('/', async (req, res) => {
   }
 });
 
+
+createAssesmentQuestion.get('/list', async(req,res)=>{
+  try{
+    const list= await getAssessment();
+    
+    res.status(201).json({
+      list
+    });
+  } catch(err){
+    console.error('something went wrong fetching data:',err.message);
+    res.status(400).json({error: err.message});
+  }
+});
+    
 module.exports = createAssesmentQuestion;
 
 
