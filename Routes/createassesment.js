@@ -1,6 +1,6 @@
 const express = require('express');
 const createAssesmentQuestion = express.Router();
-const { createAssessment } = require('../mongodb/assessment');
+const { createAssessment,getAllAssessments } = require('../mongodb/assessment');
 
 // Helper function to validate and shape the request body
 function formatAssessmentData(body) {
@@ -72,7 +72,7 @@ createAssesmentQuestion.post('/', async (req, res) => {
 
 createAssesmentQuestion.get('/list', async(req,res)=>{
   try{
-    const list= await getAssessment();
+    const list= await getAllAssessments();
     
     res.status(201).json({
       list
