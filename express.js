@@ -18,6 +18,14 @@ const cors = require('cors');
 
 const app= express();
 
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  if (Object.keys(req.body).length > 0) console.log('Body:', req.body);
+  if (Object.keys(req.query).length > 0) console.log('Query:', req.query);
+  next();
+});
+
+
 const allowedOrigins = ['https://attendancefrontend.onrender.com']
 
 app.use(cors({
