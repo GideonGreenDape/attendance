@@ -74,7 +74,7 @@ createAssesmentQuestion.get('/list', async(req,res)=>{
   try{
     const list= await getAllAssessments();
     
-    res.status(201).json({
+    res.status(200).json({
       list
     });
   } catch(err){
