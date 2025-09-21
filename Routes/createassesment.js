@@ -1,6 +1,6 @@
 const express = require('express');
 const createAssesmentQuestion = express.Router();
-const { createAssessment } = require('../mongodb/assessments');
+const { createAssessment } = require('../mongodb/assessment');
 
 // Helper function to validate and shape the request body
 function formatAssessmentData(body) {
