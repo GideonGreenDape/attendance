@@ -13,7 +13,7 @@ const sofskillvalidate= require('./Routes/softskillvalidate')
 const softskillsmarks = require('./Routes/softkillmark');
 const softskillAttendanceperformance= require('./Routes/softskillperformance')
 const TrackRouter = require('./Routes/track');
-const createAssessment= require('/Routes/createassesment')
+const createAssessment= require('./Routes/createassesment')
 const cors = require('cors');
 
 const app= express();
