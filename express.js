@@ -71,4 +71,29 @@ app.use('/adminsignup', AdminSignuproute);
 app.use('/assessment', createAssessment);
 app.use('/tracks', TrackRouter);
 
+
+// Debug: list all registered routes
+function listRoutes(app) {
+  console.log("\n=== Registered Routes ===");
+  app._router.stack.forEach((middleware) => {
+    if (middleware.route) {
+      // Routes directly on app
+      const methods = Object.keys(middleware.route.methods).join(",").toUpperCase();
+      console.log(`${methods} ${middleware.route.path}`);
+    } else if (middleware.name === "router") {
+      // Router mounted
+      middleware.handle.stack.forEach((handler) => {
+        if (handler.route) {
+          const methods = Object.keys(handler.route.methods).join(",").toUpperCase();
+          console.log(`${methods} ${middleware.regexp} -> ${handler.route.path}`);
+        }
+      });
+    }
+  });
+  console.log("=========================\n");
+}
+
+listRoutes(app);
+
+
 module.exports = app;
