@@ -25,6 +25,9 @@ app.use((req, res, next) => {
   next();
 });
 
+console.log("Mounting /performance ->", Attendanceperformance.stack?.map(r => r.route?.path));
+
+
 
 const allowedOrigin = 'https://attendancefrontend.onrender.com';
 
