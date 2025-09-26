@@ -1,13 +1,9 @@
-const DashboardAnalytics = require("express").Router();
-const TotalStudents = require("../mongodb/totalstudent");
-
-
 DashboardAnalytics.get("/", async (req, res) => {
     try {
-      
+        console.log("DashboardAnalytics / route hit");
+        res.json({ success: true, message: "Dashboard route working" });
     } catch (error) {
-        
+        console.error("Dashboard error:", error);
+        res.status(500).json({ success: false });
     }
 });
-
-module.exports = DashboardAnalytics;
