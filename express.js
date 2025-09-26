@@ -64,11 +64,17 @@ app.use('/softskillattendance', softskillsAttendance);
 app.use('/softskillvalidate', sofskillvalidate);
 app.use('/validatelink', ValidateToken);
 app.use('/performance', Attendanceperformance);
+console.log("Mounting /softskillperformance");
 app.use('/softskillperformance', softskillAttendanceperformance);
+console.log("Mounting /fetchallstudentattendance");
 app.use('/fetchallstudentattendance', allStudentAttendanceRouter);
+console.log("Mounting /AdminlogRouter");
 app.use('/adminlog', AdminlogRouter);
+console.log("Mounting /AdminSignuproute");
 app.use('/adminsignup', AdminSignuproute);
+console.log("Mounting /createAssessment");
 app.use('/assessment', createAssessment);
+console.log("Mounting /TrackRouter");
 app.use('/tracks', TrackRouter);
 
 
